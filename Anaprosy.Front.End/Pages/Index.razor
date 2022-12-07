@@ -1,0 +1,72 @@
+﻿@page "/"
+
+@inject ClientInventoryService Service
+
+<MudContainer MaxWidth="MaxWidth.Large">
+    <MudGrid Class="mt-5">
+        <MudItem lg="12">
+            <MudText Typo="Typo.h4">Index</MudText>
+        </MudItem>
+    </MudGrid>
+    <MudGrid>
+        <MudItem lg="12">
+            <MudTable Items="Inventories" Dense="true" Hover="true" Elevation="10" SortLabel="Date">
+                <ToolBarContent>
+                    <MudText Typo="Typo.h6">@($"Inventories found {Inventories.Count()}")</MudText>
+                    <MudSpacer></MudSpacer>
+                    <MudButton Variant="Variant.Filled" Color="Color.Success" Size="Size.Small" StartIcon="@Icons.Material.Filled.Add" Link="/edit">ADD</MudButton>
+                </ToolBarContent>
+                <HeaderContent>
+                    <MudTh>Id</MudTh>
+                    <MudTh><MudTableSortLabel SortBy="new Func<InventoryVM, object>(i => i.Date)" InitialDirection="SortDirection.Descending">Date</MudTableSortLabel></MudTh>
+                    <MudTh Style="width:100px">Action</MudTh>
+                </HeaderContent>
+                <RowTemplate Context="Inventory">
+                    <MudTd DataLabel="Id">@Inventory.Id</MudTd>
+                    <MudTd DataLabel="Date">@(Inventory.Date.HasValue ? Inventory.Date.Value.ToShortDateString():null)</MudTd>
+                    <MudTd DataLabel="Action">
+                        <MudIconButton Variant="Variant.Filled" Color="Color.Info" Size="Size.Small" Icon="@Icons.Material.Filled.Edit" Link="@($"/edit/{Inventory.Id}")"></MudIconButton>
+                        <MudIconButton Variant="Variant.Filled" Color="Color.Error" Size="Size.Small" Icon="@Icons.Material.Filled.Delete" OnClick="() => Delete(Inventory.Id)"></MudIconButton>
+                    </MudTd>
+                </RowTemplate>
+            </MudTable>
+        </MudItem>
+    </MudGrid>
+</MudContainer>
+
+@code {
+    private IEnumerable<InventoryVM> Inventories { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        try
+        {
+            await LoadData();
+            StateHasChanged();
+        }
+        catch(Exception e)
+        {
+            throw new Exception(e.Message);
+        }
+    }
+
+    private async Task LoadData()
+    {
+        Inventories = await Service.Gets();
+    }
+
+    private async Task Delete(Guid Id)
+    {
+        try
+        {
+            bool IsDeleted = await Service.Delete(Id);
+            if (IsDeleted)
+                await LoadData();
+
+        }
+        catch(Exception e)
+        {
+            throw new Exception(e.Message);
+        }
+    }
+}

@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Anaprosy.API", "Anaprosy.API.csproj", "{C7682F42-CD66-4F33-B8AD-D15B7BAF171E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Anaprosy.Data", "..\Anaprosy.Data\Anaprosy.Data.csproj", "{6A31CA03-7A5E-4594-B552-D48502E63AC4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Anaprosy.DAL", "..\Anaprosy.DAL\Anaprosy.DAL.csproj", "{CAD8459A-8119-44F1-91C5-78E162B693BB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Anaprosy.Client", "..\Anaprosy.Client\Anaprosy.Client.csproj", "{21C69C5D-22F1-449F-A563-5C8705B810B2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Anaprosy.Front.End", "..\Anaprosy.Front.End\Anaprosy.Front.End.csproj", "{AB0B8555-6AD9-4751-A62C-CAEB4FF73309}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Anaprosy.Service.Client", "..\Anaprosy.Client.Service\Anaprosy.Service.Client.csproj", "{ECB1C2BA-C001-4346-9565-16CC852A6974}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C7682F42-CD66-4F33-B8AD-D15B7BAF171E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7682F42-CD66-4F33-B8AD-D15B7BAF171E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7682F42-CD66-4F33-B8AD-D15B7BAF171E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7682F42-CD66-4F33-B8AD-D15B7BAF171E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A31CA03-7A5E-4594-B552-D48502E63AC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A31CA03-7A5E-4594-B552-D48502E63AC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A31CA03-7A5E-4594-B552-D48502E63AC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A31CA03-7A5E-4594-B552-D48502E63AC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CAD8459A-8119-44F1-91C5-78E162B693BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAD8459A-8119-44F1-91C5-78E162B693BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAD8459A-8119-44F1-91C5-78E162B693BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAD8459A-8119-44F1-91C5-78E162B693BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21C69C5D-22F1-449F-A563-5C8705B810B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21C69C5D-22F1-449F-A563-5C8705B810B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21C69C5D-22F1-449F-A563-5C8705B810B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21C69C5D-22F1-449F-A563-5C8705B810B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB0B8555-6AD9-4751-A62C-CAEB4FF73309}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB0B8555-6AD9-4751-A62C-CAEB4FF73309}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB0B8555-6AD9-4751-A62C-CAEB4FF73309}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB0B8555-6AD9-4751-A62C-CAEB4FF73309}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECB1C2BA-C001-4346-9565-16CC852A6974}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECB1C2BA-C001-4346-9565-16CC852A6974}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECB1C2BA-C001-4346-9565-16CC852A6974}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECB1C2BA-C001-4346-9565-16CC852A6974}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F8064295-960B-4A53-8F23-4250FD7ACD9E}
+	EndGlobalSection
+EndGlobal

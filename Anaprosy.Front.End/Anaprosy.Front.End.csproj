@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MudBlazor" Version="5.2.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Anaprosy.Client.Service\Anaprosy.Service.Client.csproj" />
+    <ProjectReference Include="..\Anaprosy.Client\Anaprosy.Client.csproj" />
+  </ItemGroup>
+
+</Project>

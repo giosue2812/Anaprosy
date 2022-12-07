@@ -1,0 +1,118 @@
+﻿@page "/edit/{ID}"
+@page "/edit"
+
+@inject ClientInventoryService Service
+@inject ClientProductService ProductService
+@inject NavigationManager NavigationManager
+
+<MudContainer MaxWidth="MaxWidth.Large">
+    <MudGrid Class="mt-5">
+        <MudItem lg="12">
+            <MudText Typo="Typo.h4">@(string.IsNullOrWhiteSpace(ID) ? "New inventory":$"Edit inventory {ID}")</MudText>
+        </MudItem>
+    </MudGrid>
+    @if(Inventory != null)
+    {
+        <MudGrid>
+            <MudItem lg="12">
+                <MudCard>
+                    <MudCardContent>
+                        <MudItem lg="4">
+                            <MudDatePicker Variant="Variant.Outlined" Label="Inventory date" @bind-Date="Inventory.Date" DateFormat="dd.MM.yyyy" Margin="Margin.Dense"></MudDatePicker>
+                        </MudItem>
+                        <MudItem lg="12">
+                            <MudTable Items="Inventory.Items" Dense="false" Hover="true" RowsPerPage="10">
+                                <ToolBarContent>
+                                    <MudText Typo="Typo.h6">Details</MudText>
+                                    <MudSpacer></MudSpacer>
+                                    <MudButton Variant="Variant.Filled" Color="Color.Success" StartIcon="@Icons.Material.Filled.Add" OnClick="() => Inventory.Items.Add(new InventoryItemVM())">ADD</MudButton>
+                                </ToolBarContent>
+                                <HeaderContent>
+                                    <MudTh>Quantity</MudTh>
+                                    <MudTh>Products</MudTh>
+                                    <MudTh>Actions</MudTh>
+                                </HeaderContent>
+                                <RowTemplate Context="Item">
+                                    <MudTd DataLabel="Quantity">
+                                        <MudNumericField Label="Quantity" @bind-Value="Item.Quantity" Variant="Variant.Outlined" Step="1" Margin="Margin.Dense"></MudNumericField>
+                                    </MudTd>
+                                    <MudTd DataLabel="Products">
+                                        <MudAutocomplete DebounceInterval="10" T="ProductVM" MaxItems="20" ToStringFunc="@((p) => p == null ? "" : p.Name)" AnchorOrigin="Origin.BottomCenter" Variant="Variant.Outlined"  @bind-Value="Item.Product" Label="Product" SearchFunc="Search" Margin="Margin.Dense"></MudAutocomplete>
+                                    </MudTd>
+                                    <MudTd DataLabel="Actions">
+                                        <MudIconButton Variant="Variant.Filled" Color="Color.Error" Icon="@Icons.Material.Filled.Delete" OnClick="() => Inventory.Items.Remove(Item)"></MudIconButton>
+                                    </MudTd>
+                                </RowTemplate>
+                                <PagerContent>
+                                    <MudTablePager></MudTablePager>
+                                </PagerContent>
+                            </MudTable>
+                        </MudItem>
+                    </MudCardContent>
+                    <MudCardActions>
+                        <MudButton Variant="Variant.Filled" Color="Color.Inherit" Size="Size.Small" Link="/">Cancel</MudButton>
+                        <MudSpacer></MudSpacer>
+                        <MudButton Variant="Variant.Filled" Color="Color.Success" Size="Size.Small" OnClick="Save">Save</MudButton>
+                    </MudCardActions>
+                </MudCard>
+            </MudItem>
+        </MudGrid>
+    }
+</MudContainer>
+
+@code {
+    [Parameter] public string ID { get; set; }
+    private InventoryVM Inventory { get; set; }
+    private IEnumerable<ProductVM> Products { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        try
+        {
+            if (string.IsNullOrWhiteSpace(ID))
+            {
+                Inventory = new InventoryVM();
+                Inventory.Items = new List<InventoryItemVM> { new InventoryItemVM() };
+            }
+            else
+            {
+                Inventory = await Service.Get(new Guid(ID),"Items.Product");
+            }
+        }
+        catch (Exception e)
+        {
+            throw new Exception(e.Message);
+        }
+    }
+
+    private async Task<IEnumerable<ProductVM>> Search(string value)
+    {
+        try
+        {
+            IEnumerable<ProductVM> Products = await ProductService.GetsByValue(value);
+            return Products;
+        }
+        catch(Exception e)
+        {
+            throw new Exception(e.Message);
+        }
+    }
+
+    private async Task Save()
+    {
+        try
+        {
+            if (Inventory.Id == Guid.Empty)
+                Inventory = await Service.Add(Inventory);
+            else
+                Inventory = await Service.Put(Inventory);
+            NavigationManager.NavigateTo("/");
+
+        }
+        catch(Exception e)
+        {
+            throw new Exception(e.Message);
+        }
+    }
+
+}
